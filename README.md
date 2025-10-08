@@ -13,8 +13,10 @@ Each **interference pattern** becomes a ripple across the sea.
 When you run a quantum circuit (via **Qiskit** or **Cirq**), its probability amplitudes are mapped into sound and light.  
 The result is an evolving symphony — a conversation between the mathematics of the quantum world and the songs of the deep.
 
-> “Just as whales use waves to communicate across oceans, quantum systems use waves of probability to speak across the universe.”
-
+<p align="center">
+<i>“The sea, once it casts its spell, holds one in its net of wonder forever.”</i><br>
+— <b>Jacques Cousteau</b>, oceanographer and explorer
+</p>
 ---
 
 ## How It Works  
