@@ -45,3 +45,41 @@ The result is an evolving symphony — a conversation between the mathematics of
 - 🌌 Animated ocean reflecting quantum probability waves  
 - 🔀 Random-walk “quantum remix” generator for endless melodies  
 - 📈 Modular design for music, education, or visualization demos  
+
+---
+
+  ### Project Structure
+
+```
+quantum-whalesong/
+├─ README.md
+├─ LICENSE
+├─ requirements.txt
+├─ Makefile                       # simple build/run commands
+├─ quantum_whalesong.py           # main runnable demo (quantum → sound)
+│
+├─ web/                           # whale & ocean visuals (HTML/JS/CSS)
+│  ├─ index.html
+│  ├─ styles.css
+│  └─ script.js
+│
+├─ examples/                      # example shell scripts or presets
+│  └─ run_bell.sh
+│
+├─ notebooks/                     # educational or interactive demos
+│  └─ 01_qubits_to_music.ipynb
+│
+├─ src/quantum_whalesong/         # modular Python package (future)
+│  ├─ __init__.py
+│  ├─ circuits.py
+│  ├─ mapping.py
+│  ├─ synth.py
+│  ├─ io.py
+│  └─ cli.py
+│
+├─ data/                          # optional input data (e.g., NOAA whale songs)
+│  └─ .gitkeep
+│
+└─ exports/                       # generated WAV/JSON outputs (git-ignored)
+   └─ .gitkeep
+```
