@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# 🌊 Quantum Whalesong - listen to the ocean’s quantum symphony 🐋
 """
 quantum_whalesong.py
 
