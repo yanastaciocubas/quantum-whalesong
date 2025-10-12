@@ -545,6 +545,14 @@ def pipeline(preset: str = "bell",
         midi_path = EXPORTS / (Path(outfile).stem + ".mid")
         export_midi(notes_for_midi, midi_path, tempo=80, hold_beats=8)
 
+def _debug_whale_echo():
+    """
+    Temporary helper for checking whale echo patterns.
+    Not used in production.
+    """
+    return "Echoing quantum whales..."
+
+
 # -------------------------
 # CLI
 # -------------------------
