@@ -580,3 +580,27 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# =============================================================================
+# Developer Notes
+# =============================================================================
+# This file is designed to be modular and extensible.
+#
+# To add new quantum circuits:
+#     1. Create a new method in QuantumWhalesong (e.g., create_my_algorithm()).
+#     2. Use Qiskit gates to define your algorithm.
+#     3. Return a QuantumCircuit object.
+#
+# To extend sound mapping:
+#     - Modify amplitudes_to_notes() to experiment with custom musical scales.
+#     - Adjust phase-to-panning logic to create spatialized sound effects.
+#
+# To integrate new visualizations:
+#     - Export data to JSON using export_json().
+#     - Use Three.js or WebGL to render whales and waves that respond to
+#       amplitudes and phases in real time.
+#
+# To experiment with machine learning:
+#     - Use TensorFlow Quantum or PyTorch to analyze statevector patterns.
+#     - Generate “quantum remixes” by sampling and modifying amplitude spectra.
+#
