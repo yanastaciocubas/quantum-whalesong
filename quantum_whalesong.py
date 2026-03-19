@@ -204,40 +204,26 @@ def get_statevector_from_cirq(circuit) -> np.ndarray:
 # -------------------------
 def reduced_density_matrix(state: np.ndarray, total_qubits: int, keep: List[int]) -> np.ndarray:
     """
-    Compute reduced density matrix (partial trace) keeping qubits in `keep` list.
-    state: complex vector length 2**total_qubits
-    keep: list of qubit indices to keep (0 is least significant or most? here we use conventional ordering: index 0 is qubit 0)
-    Returns a matrix of size 2**len(keep).
+    Compute the reduced density matrix for a pure state by partial trace.
+
+    For a pure state |ψ⟩, we reshape into a bipartite system (kept ⊗ traced-out),
+    then compute ρ_keep = M @ M† directly — avoiding the full 4^n density matrix
+    that np.outer would produce, which is O(4^n) in memory.
     """
-    # reshape state to tensor of shape (2,)*n
-    state_tensor = state.reshape([2] * total_qubits)
-    # axes order: keep indices first, then traced out
     keep = list(keep)
     trace_out = [i for i in range(total_qubits) if i not in keep]
-    # transpose so keep axes come first
+
+    # Reshape to per-qubit tensor, transpose so kept axes come first
+    state_tensor = state.reshape([2] * total_qubits)
     perm = keep + trace_out
     transposed = np.transpose(state_tensor, perm)
-    k = len(keep)
-    keep_dim = 2 ** k
-    trace_dim = 2 ** (total_qubits - k)
-    # reshape to (keep_dim, trace_dim)
-    mat = transposed.reshape((keep_dim, trace_dim))
-    # density matrix = mat @ mat.conj().T? Actually we need to compute partial trace:
-    # Construct density operator and trace out trace_dim indices:
-    # easier: build full density operator then trace
-    full_rho = np.outer(state, np.conjugate(state)).reshape([2] * (2 * total_qubits))
-    # Permute axes so keep indices appear first in both bras and kets
-    keep_axes = keep
-    keep_axes_pairs = keep_axes + [i + total_qubits for i in keep_axes]
-    trace_axes = trace_out
-    trace_axes_pairs = trace_axes + [i + total_qubits for i in trace_axes]
-    perm2 = keep + trace_out + [i + total_qubits for i in keep] + [i + total_qubits for i in trace_out]
-    rho_perm = np.transpose(full_rho, perm2)
-    # reshape to (keep_dim, trace_dim, keep_dim, trace_dim)
-    rho_rs = rho_perm.reshape((keep_dim, trace_dim, keep_dim, trace_dim))
-    # partial trace over trace_dim
-    reduced = np.einsum('ijkt->ik', rho_rs)
-    return reduced
+
+    keep_dim = 2 ** len(keep)
+    trace_dim = 2 ** len(trace_out)
+
+    # ρ_A = M @ M†, where M is the (keep_dim × trace_dim) reshaped state
+    M = transposed.reshape((keep_dim, trace_dim))
+    return M @ M.conj().T
 
 def is_entangled_pair(state: np.ndarray, total_qubits: int, a: int, b: int, tol=0.9999) -> bool:
     """
