@@ -481,12 +481,14 @@ def pipeline(preset: str = "bell",
             dim = 2 ** max(1, n_qubits)
             state = np.ones(dim, dtype=np.complex128) / math.sqrt(dim)
 
+    # Derive qubit count from statevector length
+    qcount = int(round(math.log2(len(state)))) if len(state) > 1 else 1            
+
     if remix_steps > 0:
         state = random_walk_remix(state, steps=remix_steps, seed=int(time.time() % 1e9))
 
     # voice params
-    voices = state_to_voice_params(state, qcount=int(round(math.log2(len(state)))) if len(state)>1 else 1,
-                                   f_min=35.0, f_max=420.0)
+    voices = state_to_voice_params(state, qcount=qcount, f_min=35.0, f_max=420.0)
 
     # entanglement resonance
     try:
@@ -518,7 +520,7 @@ def pipeline(preset: str = "bell",
     if export_json:
         js = {
             "preset": preset,
-            "n_qubits": int(round(math.log2(len(state)))) if len(state)>1 else 1,
+            "n_qubits":"qcount", # already-computed variable to use
             "amplitudes": np.abs(state).tolist(),
             "phases": np.angle(state).tolist(),
             "voices": voices
