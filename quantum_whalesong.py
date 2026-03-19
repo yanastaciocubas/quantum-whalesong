@@ -492,7 +492,7 @@ def pipeline(preset: str = "bell",
 
     # entanglement resonance
     try:
-        voices = apply_entanglement_resonance(voices, state, qcount=int(round(math.log2(len(state)))) if len(state)>1 else 1)
+        voices = apply_entanglement_resonance(voices, state, qcount=qcount)
     except Exception:
         pass
 
