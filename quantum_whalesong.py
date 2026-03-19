@@ -520,7 +520,7 @@ def pipeline(preset: str = "bell",
     if export_json:
         js = {
             "preset": preset,
-            "n_qubits":"qcount", # already-computed variable to use
+            "n_qubits": qcount , # already-computed variable to use
             "amplitudes": np.abs(state).tolist(),
             "phases": np.angle(state).tolist(),
             "voices": voices
