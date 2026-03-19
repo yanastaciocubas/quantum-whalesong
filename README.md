@@ -54,7 +54,8 @@ The result is an evolving symphony — a conversation between the mathematics of
 quantum-whalesong/
 ├─ README.md
 ├─ LICENSE
-├─ requirements.txt
+├─ requirements.txt               # core requirements
+├─ requirements_optional.txt      # optional requirements
 ├─ Makefile                       # simple build/run commands
 ├─ quantum_whalesong.py           # main runnable demo (quantum → sound)
 │
