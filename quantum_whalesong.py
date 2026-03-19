@@ -536,6 +536,9 @@ def main():
     parser.add_argument("--remix-steps", type=int, default=0, help="Apply random-walk remix steps to statevector.")
     parser.add_argument("--duration", type=float, default=3.6, help="Base duration per voice in seconds.")
     parser.add_argument("--sr", type=int, default=44100, help="Sample rate for WAV.")
+    parser.add_argument("--sr", type=int, default=44100, help="Sample rate for WAV.")
+    parser.add_argument("--dry-run", action="store_true",
+                    help="Run the full pipeline without writing any files.")
     args = parser.parse_args()
 
     preset = args.preset
@@ -552,8 +555,9 @@ def main():
         n_qubits = max(1, args.n)
 
     pipeline(preset=preset, n_qubits=n_qubits, outfile=args.outfile,
-             export_json=args.export_json, export_midi_flag=args.export_midi,
-             remix_steps=remix_steps, duration=args.duration, sr=args.sr)
+         export_json=args.export_json, export_midi_flag=args.export_midi,
+         remix_steps=remix_steps, duration=args.duration, sr=args.sr,
+         dry_run=args.dry_run)
 
 if __name__ == "__main__":
     main()
