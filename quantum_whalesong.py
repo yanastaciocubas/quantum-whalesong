@@ -464,22 +464,10 @@ def pipeline(preset: str = "bell",
              remix_steps: int = 0,
              duration: float = 4.0,
              sr: int = 44100):
-    # Build or simulate circuit
-    if QISKIT_AVAILABLE:
-        qc = build_qc_qiskit(preset, n_qubits)
-        state = get_statevector_from_qiskit(qc)
-    elif CIRQ_AVAILABLE:
-        qc = build_qc_cirq(preset, n_qubits)
-        state = get_statevector_from_cirq(qc)
-    else:
-        # synthetic fallback: bell or uniform superposition
-        log("No Qiskit or Cirq found — using synthetic state for demo.")
-        if preset == "bell":
-            state = np.array([1/math.sqrt(2), 0, 0, 1/math.sqrt(2)], dtype=np.complex128)
-            n_qubits = 2
-        else:
-            dim = 2 ** max(1, n_qubits)
-            state = np.ones(dim, dtype=np.complex128) / math.sqrt(dim)
+    
+    state = get_statevector(preset, n_qubits)
+    if preset == "bell" and not QISKIT_AVAILABLE and not CIRQ_AVAILABLE:
+        n_qubits = 2
 
     # Derive qubit count from statevector length
     qcount = int(round(math.log2(len(state)))) if len(state) > 1 else 1            
