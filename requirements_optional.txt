@@ -8,6 +8,9 @@ pyopengl>=3.1.7
 pygame>=2.6.0
 
 # ML / quantum remixes
+# WARNING: tensorflow-quantum is only compatible with specific TF versions.
+# Check https://quantumai.google/install before upgrading either package.
+# Last known working pair:
 tensorflow>=2.15.0
 tensorflow-quantum>=0.7.3
 
