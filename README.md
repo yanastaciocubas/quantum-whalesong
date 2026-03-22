@@ -62,7 +62,10 @@ quantum-whalesong/
 ├─ web/                           # whale & ocean visuals (HTML/JS/CSS)
 │  ├─ index.html
 │  ├─ styles.css
-│  └─ script.js
+│  ├─ script.js
+│  ├─ visualizer.html
+│  ├─ visualizer.css
+│  └─ visualizer.js
 │
 ├─ examples/                      # example shell scripts or presets
 │  └─ run_bell.sh
