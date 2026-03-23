@@ -71,7 +71,7 @@ quantum-whalesong/
 │  └─ run_bell.sh
 │
 ├─ notebooks/                     # educational or interactive demos
-│  └─ 01_qubits_to_music.ipynb
+│  └─ 01_qubits_to_music.ipynb    # in progress
 │
 ├─ src/quantum_whalesong/         # modular Python package (future)
 │  ├─ __init__.py
